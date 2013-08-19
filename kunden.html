@@ -1,0 +1,64 @@
+<html>
+
+<body>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+
+
+<script>
+var onSuccess = function(position) {
+
+document.getElementById("karte").innerHTML = 'Latitude: '          + position.coords.latitude          + '<br>';
+document.getElementById("karte").innerHTML +=           'Longitude: '         + position.coords.longitude         + '<br>';
+document.getElementById("karte").innerHTML +=          'Altitude: '          + position.coords.altitude          + '<br>';
+document.getElementById("karte").innerHTML +=          'Accuracy: '          + position.coords.accuracy          + '<br>';
+document.getElementById("karte").innerHTML +=          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br>';
+document.getElementById("karte").innerHTML +=          'Heading: '           + position.coords.heading           + '<br>';
+document.getElementById("karte").innerHTML +=          'Speed: '             + position.coords.speed             + '<br>';
+document.getElementById("karte").innerHTML +=          'Timestamp: '         + position.timestamp                + '<br>';
+
+var umkreis = window.localStorage.getItem("umkreis");
+Ajax_Kunden(position.coords.latitude, position.coords.longitude, umkreis);
+
+};
+
+
+
+function onError(error) {
+	    alert('Lokalisierung nicht moeglich\n' +
+	    		'code: '    + error.code    + '\n' +
+	            'message: ' + error.message + '\n');
+}
+
+
+
+function Ajax_Kunden(latitude, longitude, distance){
+			$.ajax({
+				url: "http://webserver/doitappserver/ajax_kunden.php",
+				data: { latitude: latitude,
+					longitude: longitude,
+					distance: distance
+					  },
+				datatype: "json",
+				type: "POST",
+				success: function(data) { Ajax_return_Kunden(data); }
+			   });
+		}
+		function Ajax_return_Kunden(data){
+			document.getElementById("ajaxreturn").innerHTML = data;
+		}
+</script>
+
+
+
+
+<a href="menue.html">zurueck</a> ---
+<a href="javascript:navigator.geolocation.getCurrentPosition(onSuccess, onError,{ enableHighAccuracy: true });">Get-GeoData</a>
+
+<div id="karte"></div>
+<hr>
+<div id="ajaxreturn"></div>
+</body></html>

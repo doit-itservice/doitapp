@@ -1,0 +1,73 @@
+<html>
+<body>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+<script>
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+
+function speichern() 
+{
+	if(document.getElementById("gpslokalisierung").checked == true)
+	{
+	        window.localStorage.setItem("GPS_aktiv", "1");
+	}
+	else
+	{
+		window.localStorage.setItem("GPS_aktiv", "0");
+	}
+	
+	window.localStorage.setItem("umkreis", document.getElementById("umkreis").value);
+
+        //var keyname = window.localStorage.key(0);
+        // keyname is now equal to "key"
+	var value = window.localStorage.getItem("GPS_aktiv");
+}
+
+
+function onDeviceReady() 
+{
+	var value = window.localStorage.getItem("GPS_aktiv");
+	var umkreis = window.localStorage.getItem("umkreis");
+	if(value == "1")
+	{
+		document.getElementById("gpslokalisierung").checked = true;
+	}
+	
+	$('select').val(umkreis);
+	
+}
+
+
+
+
+
+
+</script>
+<div align=center><br><br><br>
+DoIT-App-Server: <input type=text><br>
+Benutzername: <input type=text><br>
+Connection-AuthCode: <input type=text><br>
+<br>
+Umkreis<br>
+<select name="umkreis" id="umkreis">
+<option value="100">100m
+<option value="250">250m
+<option value="500">500m
+<option value="1000">1000m
+<option value="2500">2500m
+<option value="5000">5000m
+</select>
+<br>
+GPS-Lokalisierung aktivieren<br>
+<input type="checkbox" name="gpslokalisierung" id="gpslokalisierung"><br>
+<br>
+<a href="javascript:speichern();">Speichern</a>
+<br><a href="javascript:onDeviceReady();">onDeviceReady</a>
+<br><br>
+<a href="menue.html">Abbruch</a>
+</div>
+</body></html>

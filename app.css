@@ -1,0 +1,89 @@
+
+.main_menu{padding-bottom:0px}
+.main_menu ul{float:left;position:relative;z-index:100}
+.main_menu li{float:left;font-size:14px;line-height:16px;font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif}
+.main_menu li img{display:block}
+.main_menu h2 img{display:inline}
+.main_menu li a,
+.main_menu li a:hover{padding:10px 31px;display:block;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border:1px solid #b9b9b9;border-left:0 none}
+.main_menu li a{background:#d1d1d1 url(bg_menu.gif) repeat-x left top}
+.main_menu li.first a,
+.main_menu li.first a:hover{display:block;padding:10px 31px;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border-left:1px solid #b9b9b9}
+.main_menu li.last a,
+.main_menu li.last a:hover{padding:10px 31px}
+.main_menu li a:hover,
+.main_menu li.selected a,
+.main_menu li.dropdown_hovered a{background:#fff url(bg_menu_hover.gif) repeat-x left top;text-decoration:none}
+.main_menu li.has_dropdown a:hover,
+.main_menu li.dropdown_hovered a{border-bottom:1px solid #fff}
+.main_menu li.first,
+.main_menu li.first a,
+.main_menu li.first a:hover{-moz-border-radius:8px 0 0 8px;-webkit-border-radius:8px 0 0 8px;border-radius:8px 0 0 8px}
+.main_menu li.last,
+.main_menu li.last a,
+.main_menu li.last a:hover{-moz-border-radius:0 8px 8px 0;-webkit-border-radius:0 8px 8px 0;border-radius:0 8px 8px 0}
+
+.main_menu li.firstlast a,
+.main_menu li.firstlast a:hover{display:block;padding:10px 31px;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border-left:1px solid #b9b9b9}
+.main_menu li.firstlast,
+.main_menu li.firstlast a,
+.main_menu li.firstlast a:hover{-moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;border-radius:8px 8px 8px 8px}
+
+
+.box_dropdown_wrapper{position:absolute;left:30px;padding-top:-30px;z-index:200}.inner_drop_box_three_columns{background:transparent url(/images/common/backgrounds/dropdown/inner_dropdown_box_three_column_bg.gif) repeat-y 0 0}.inner_drop_box_two_columns{background:transparent url(/images/common/backgrounds/dropdown/inner_dropdown_box_two_column_bg.gif) repeat-y 0 0}.inner_drop_box_three_columns_equal{background:transparent url(/images/common/backgrounds/dropdown/inner_dropdown_box_three_column_equal_bg.gif) repeat-y 0 0}.inner_drop_box_three_columns_column_01,.inner_drop_box_three_columns_column_02,.inner_drop_box_three_columns_column_03,.inner_drop_box_two_columns_column_01,.inner_drop_box_two_columns_column_02,.inner_drop_box_three_columns_equal_column_01,.inner_drop_box_three_columns_equal_column_02,.inner_drop_box_three_columns_equal_column_03{float:left;padding:0 20px 0 28px}.inner_drop_box_three_columns_column_01,.inner_drop_box_three_columns_column_02{width:300px}.inner_drop_box_two_columns_column_01,.inner_drop_box_two_columns_column_02{width:434px}.inner_drop_box_three_columns_equal_column_01,.inner_drop_box_three_columns_equal_column_02,.inner_drop_box_three_columns_equal_column_03{width:272px}.inner_drop_box_three_columns_column_03,.inner_drop_box_two_columns_column_02,.inner_drop_box_three_columns_equal_column_03{padding-right:0}.inner_drop_box_three_columns_column_01,.inner_drop_box_two_columns_column_01,.inner_drop_box_three_columns_equal_column_01{padding-left:0}.inner_drop_box_three_columns_column_03{width:216px}.dropdown_title{font:normal 30px Georgia,"Times New Roman",Times,serif;color:#3a373c;padding-bottom:20px}.box_dropdown_wrapper .box_article{padding:0 0 20px}.box_dropdown_wrapper .box_article p{font-size:13px;padding-bottom:10px}.box_dropdown_wrapper ul{float:none}.box_dropdown_wrapper li{float:none;padding-bottom:10px;font-size:13px}.box_dropdown_wrapper .box_content a,.box_dropdown_wrapper .box_content a:hover,.box_dropdown_wrapper li a,.box_dropdown_wrapper li a:hover{border:0 none}.box_dropdown_wrapper a,.box_dropdown_wrapper a:hover,.box_dropdown_wrapper .box_content a,.box_dropdown_wrapper .box_content a:hover,.box_dropdown_wrapper .box_content .title_05 a,.box_dropdown_wrapper .box_content .title_05 a:hover,
+.main_menu li .box_dropdown_wrapper a,
+.main_menu li.selected .box_dropdown_wrapper a,
+.main_menu li .box_dropdown_wrapper a:hover{background:transparent none;padding:0;display:inline}.box_dropdown_wrapper .box_content li a,.box_dropdown_wrapper .box_content li a:hover,.box_dropdown_wrapper .box_content .link_01 a,.box_dropdown_wrapper .box_content .link_01 a:hover{background:transparent url(/images/common/picto/blue_arrow.png) no-repeat right 6px;font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif;border:0 none;padding:0 10px 0 0;font-size:13px;color:#08c;text-shadow:0 0 0 transparent}
+.main_menu li .box_dropdown_wrapper p a,
+.main_menu li.selected .box_dropdown_wrapper p a,
+.main_menu li .box_dropdown_wrapper p a:hover{color:#08c}
+.main_menu li .box_dropdown_wrapper p a:hover{text-decoration:underline}
+.main_menu li .box_dropdown_wrapper p a:visited{color:#059}.box_dropdown_wrapper .box_content li a:hover,.box_dropdown_wrapper .box_content .link_01 a:hover{text-decoration:underline}.box_dropdown_wrapper .box_content .title_05{padding-bottom:0}.box_dropdown_wrapper .box_content .title_05 a,.box_dropdown_wrapper .box_content .title_05 a:hover{color:#759e1a;padding-bottom:0}.box_dropdown_wrapper .box_content .title_05 a:hover{text-decoration:underline}.box_dropdown_wrapper_illustration{text-align:center}.box_dropdown_wrapper .box_dropdown_wrapper_illustration img{display:inline}li.dropdown_hovered .box_dropdown_wrapper .box_dropdown_wrapper_illustration a,li.dropdown_hovered .box_dropdown_wrapper .box_dropdown_wrapper_illustration a:hover{background:transparent none}.box_dropdown_wrapper .button_01,.box_dropdown_wrapper .button_01 .border_l,.box_dropdown_wrapper .button_01 .border_r{background-color:#fff}.box_dropdown_wrapper .button_01 .border_l,.box_dropdown_wrapper .button_01 .border_r{min-height:28px}
+.main_menu li.last img{display:inline}.submenu .list_submenu li{font-size:14px;padding:8px 0 8px 10px;background:transparent url(../../images/common/backgrounds/border_gradient_transparent.gif) no-repeat 0 top}.submenu .list_submenu li.first{background:0}.submenu .list_submenu li a,.submenu .list_submenu li a:hover{font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif;background:transparent url(../../images/common/picto/submenu_picto.gif) no-repeat right 0;color:#313131;text-decoration:none;display:block;min-height:16px;_height:16px}.submenu .list_submenu li a:hover,.submenu .list_submenu li.selected a,.submenu .list_submenu li.selected a:hover{background:transparent url(../../images/common/picto/submenu_picto_hover.gif) no-repeat right 0}.submenu .list_submenu li.selected a,.submenu .list_submenu li.selected a:hover{font-weight:bold}.submenu .list_submenu li a:hover{text-decoration:underline}
+
+#main_menu_id .box_dropdown_wrapper ul li{list-style-type:none}
+#main_menu_id .box_dropdown_wrapper ul{margin-left:0}
+
+a { text-decoration: none; }
+li {
+    list-style: none outside none;
+}
+
+.box_dropdown_wrapper{display:none}
+
+
+.box_dropdown_wrapper 
+.border_l{min-height:238px;_height:238px;background:transparent url(drop_tl.png) no-repeat left top}
+
+.box_dropdown_wrapper 
+.border_r{min-height:238px;_height:238px;background:transparent url(drop_tr.png) no-repeat right top}
+
+.box_dropdown_wrapper 
+.middle_border_l{background:transparent url(drop_ml.png) no-repeat left 238px;padding-left:11px}
+
+.box_dropdown_wrapper 
+.middle_border_r{background:transparent url(drop_mr.png) no-repeat right 238px;padding-right:11px}
+
+.box_dropdown_wrapper 
+.content_wrapper{background-color:#fff;min-height:238px;_height:238px;width:968px;margin:0 auto}
+
+.box_dropdown_wrapper 
+
+.box_content{padding:14px 26px}
+
+.box_dropdown_wrapper 
+.bottom,
+
+.box_dropdown_wrapper 
+.bottom div{height:30px;line-height:0;font-size:0}
+
+.box_dropdown_wrapper 
+.bottom 
+.corner_l{padding:0 0 0 30px;background:transparent url(drop_bl.png) no-repeat left top}
+.box_dropdown_wrapper 
+.bottom 
+.corner_r{padding:0 30px 0 0;background:transparent url(drop_br.png) no-repeat right top}
+.box_dropdown_wrapper 
+.bottom 
+.border{background:transparent url(drop_bm.png) repeat-x left top;width:930px}
+

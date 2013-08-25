@@ -1,8 +1,14 @@
 <html>
 <body>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
+<script src="jquery-1.9.1.min.js"></script>
+-->
+
+
+<script src="jquery-1.9.1.js"></script>
+<script src="jquery.mobile-1.3.2.js"></script>
 
 <script>
 
@@ -11,46 +17,60 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function speichern() 
 {
-	if(document.getElementById("gpslokalisierung").checked == true)
-	{
-	        window.localStorage.setItem("GPS_aktiv", "1");
-	}
-	else
-	{
-		window.localStorage.setItem("GPS_aktiv", "0");
-	}
-	
 	window.localStorage.setItem("umkreis", document.getElementById("umkreis").value);
-
-        //var keyname = window.localStorage.key(0);
-        // keyname is now equal to "key"
-	var value = window.localStorage.getItem("GPS_aktiv");
+	window.localStorage.setItem("DOITserver", document.getElementById("DOITserver").value);
+	window.localStorage.setItem("DOITuser", document.getElementById("DOITuser").value);
+	window.localStorage.setItem("DOITauthcode", document.getElementById("DOITauthcode").value);
+	location.href = "menue.html";
 }
 
 
 function onDeviceReady() 
 {
-	var value = window.localStorage.getItem("GPS_aktiv");
-	var umkreis = window.localStorage.getItem("umkreis");
-	if(value == "1")
-	{
-		document.getElementById("gpslokalisierung").checked = true;
-	}
+	document.getElementById("DOITserver").value = window.localStorage.getItem("DOITserver");
+	document.getElementById("DOITuser").value = window.localStorage.getItem("DOITuser");
+	document.getElementById("DOITauthcode").value = window.localStorage.getItem("DOITauthcode");
 	
-	$('select').val(umkreis);
+	
+	var wert = window.localStorage.getItem("umkreis");
+	//$('select').val(window.localStorage.getItem("umkreis"));
+	
+	
+	/*
+	
+	$("select option").filter(function() {
+    //may want to use $.trim in here
+    return $(this).text() == wert; 
+}).attr('selected', true);
+*/
+
+
+
+
+
+	//alert(wert);
+	
+	/*
+		for (var i=0; i < document.getElementById("umkreis").options.length; i++){
+		if (document.getElementById("umkreis").options[i].value == wert) {
+			document.getElementById("umkreis").options[i].selected = true;
+			//alert(document.getElementById("umkreis").options[i].value + " ja " + wert);
+		} else {
+			document.getElementById("umkreis").options[i].selected = false;
+			//alert(document.getElementById("umkreis").options[i].value + " nein " + wert);
+		}
+		}
+		*/
+	
+	
 	
 }
 
-
-
-
-
-
 </script>
 <div align=center><br><br><br>
-DoIT-App-Server: <input type=text><br>
-Benutzername: <input type=text><br>
-Connection-AuthCode: <input type=text><br>
+DoIT-App-Server: <input type=text id="DOITserver"><br>
+Benutzername: <input type=text id="DOITuser"><br>
+Connection-AuthCode: <input type=text id="DOITauthcode"><br>
 <br>
 Umkreis<br>
 <select name="umkreis" id="umkreis">
@@ -62,12 +82,13 @@ Umkreis<br>
 <option value="5000">5000m
 </select>
 <br>
-GPS-Lokalisierung aktivieren<br>
-<input type="checkbox" name="gpslokalisierung" id="gpslokalisierung"><br>
+250m empfohlen<br>
 <br>
 <a href="javascript:speichern();">Speichern</a>
-<br><a href="javascript:onDeviceReady();">onDeviceReady</a>
-<br><br>
-<a href="menue.html">Abbruch</a>
 </div>
+<script>
+$(document).ready(function(){
+   $('select').val('1000');
+});
+</script>
 </body></html>

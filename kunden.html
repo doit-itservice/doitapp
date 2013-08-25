@@ -1,62 +1,127 @@
 <html>
-
 <body>
+   <style type="text/css">
+
+.main_menu p{float:left;font-size:14px;line-height:16px;font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif}
+
+.main_menu p a,
+.main_menu p a:hover{color:#2f2f2f;text-shadow:#fff 0 1px 1px;border:1px solid #b9b9b9;border-left:0 none}
+.main_menu p a{background:#d1d1d1 url(bg_menu.gif) repeat-x left top}
+.main_menu p.first a,
+.main_menu p.first a:hover{display:block;padding:10px 31px;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border-left:1px solid #b9b9b9}
+.main_menu p.last a,
+.main_menu p.last a:hover{padding:10px 31px}
+.main_menu p a:hover,
+.main_menu p.selected a,
+.main_menu p.dropdown_hovered a{background:#fff url(bg_menu_hover.gif) repeat-x left top;text-decoration:none}
+.main_menu p.has_dropdown a:hover,
+.main_menu p.dropdown_hovered a{border-bottom:1px solid #fff}
+.main_menu p.first,
+.main_menu p.first a,
+.main_menu p.first a:hover{-moz-border-radius:8px 0 0 8px;-webkit-border-radius:8px 0 0 8px;border-radius:8px 0 0 8px}
+.main_menu p.last,
+.main_menu p.last a,
+.main_menu p.last a:hover{-moz-border-radius:0 8px 8px 0;-webkit-border-radius:0 8px 8px 0;border-radius:0 8px 8px 0}
+
+.main_menu p.firstlast a,
+.main_menu p.firstlast a:hover{display:block;padding:10px 31px;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border-left:1px solid #b9b9b9}
+.main_menu p.firstlast,
+.main_menu p.firstlast a,
+.main_menu p.firstlast a:hover{-moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;border-radius:8px 8px 8px 8px}
+
+
+a { text-decoration: none; }
+p {
+    list-style: none outside none;
+	width: 100%;
+}
+
+</style>
+
 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
-
-
 <script>
-var onSuccess = function(position) {
-
-document.getElementById("karte").innerHTML = 'Latitude: '          + position.coords.latitude          + '<br>';
-document.getElementById("karte").innerHTML +=           'Longitude: '         + position.coords.longitude         + '<br>';
-document.getElementById("karte").innerHTML +=          'Altitude: '          + position.coords.altitude          + '<br>';
-document.getElementById("karte").innerHTML +=          'Accuracy: '          + position.coords.accuracy          + '<br>';
-document.getElementById("karte").innerHTML +=          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br>';
-document.getElementById("karte").innerHTML +=          'Heading: '           + position.coords.heading           + '<br>';
-document.getElementById("karte").innerHTML +=          'Speed: '             + position.coords.speed             + '<br>';
-document.getElementById("karte").innerHTML +=          'Timestamp: '         + position.timestamp                + '<br>';
-
-var umkreis = window.localStorage.getItem("umkreis");
-Ajax_Kunden(position.coords.latitude, position.coords.longitude, umkreis);
-
+var onSuccess = function(position){
+	document.getElementById("karte").innerHTML = 'Latitude: '          + position.coords.latitude          + '<br>';
+	document.getElementById("karte").innerHTML +=           'Longitude: '         + position.coords.longitude         + '<br>';
+	document.getElementById("karte").innerHTML +=          'Altitude: '          + position.coords.altitude          + '<br>';
+	document.getElementById("karte").innerHTML +=          'Accuracy: '          + position.coords.accuracy          + '<br>';
+	document.getElementById("karte").innerHTML +=          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br>';
+	document.getElementById("karte").innerHTML +=          'Heading: '           + position.coords.heading           + '<br>';
+	document.getElementById("karte").innerHTML +=          'Speed: '             + position.coords.speed             + '<br>';
+	document.getElementById("karte").innerHTML +=          'Timestamp: '         + position.timestamp                + '<br>';
+	
+	var umkreis = window.localStorage.getItem("umkreis");
+	if(umkreis < 1){umkreis = 250;}
+	document.getElementById("ajaxreturn").innerHTML = "Suche Kunden...";
+	Ajax_Kunden(position.coords.latitude, position.coords.longitude, umkreis);
 };
 
-
-
 function onError(error) {
-	    alert('Lokalisierung nicht moeglich\n' +
-	    		'code: '    + error.code    + '\n' +
-	            'message: ' + error.message + '\n');
+	alert('Lokalisierung nicht moeglich\n' +
+			'code: '    + error.code    + '\n' +
+	        'message: ' + error.message + '\n');
 }
 
-
-
 function Ajax_Kunden(latitude, longitude, distance){
-			$.ajax({
-				url: "http://webserver/doitappserver/ajax_kunden.php",
-				data: { latitude: latitude,
-					longitude: longitude,
-					distance: distance
-					  },
-				datatype: "json",
-				type: "POST",
-				success: function(data) { Ajax_return_Kunden(data); }
-			   });
-		}
-		function Ajax_return_Kunden(data){
-			document.getElementById("ajaxreturn").innerHTML = data;
-		}
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_kunden.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			latitude: latitude,
+			longitude: longitude,
+			distance: distance
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data) { Ajax_return_Kunden(data); }
+	   });
+}
+		
+function Ajax_return_Kunden(data){
+	document.getElementById("ajaxreturn").innerHTML = data;
+}
+
+//url: "http://webserver/doitappserver/ajax_kunden.php",
+
+function kundensuche(searchstring){
+	if(searchstring.length > 4){
+		var DOITserver = window.localStorage.getItem("DOITserver");
+		var DOITuser = window.localStorage.getItem("DOITuser");
+		var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+		$.ajax({
+			url: DOITserver+"/ajax_kunden.php",
+			data: {
+				DOITuser: DOITuser,
+				DOITauthcode: DOITauthcode,
+				kundensuche: searchstring  
+				},
+			datatype: "json",
+			type: "POST",
+			success: function(data) { Ajax_return_Kunden(data); }
+		   });
+	}
+}
 </script>
 
+<div align=center>
+	<div class="main_menu" id="main_menu_id" align=center>
+			<p class="firstlast"><a href="javascript:navigator.geolocation.getCurrentPosition(onSuccess, onError,{ enableHighAccuracy: true });">Orte mich!</a></p><br><br>
+	</div>
+</div><br>
 
 
 
-<a href="menue.html">zurueck</a> ---
-<a href="javascript:navigator.geolocation.getCurrentPosition(onSuccess, onError,{ enableHighAccuracy: true });">Get-GeoData</a>
+
+<input type="text" name="kundensuche" placeholder="Kundenname" onkeyup="kundensuche(this.value);">
 
 <div id="karte"></div>
 <hr>

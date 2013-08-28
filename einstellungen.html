@@ -15,7 +15,7 @@
 function onLoad()
 {
 	alert("onload vor");
-	document.addEventListener("deviceready", onDeviceReady, false);
+	document.addEventListener("deviceready", onDeviceReady(), false);
 	alert("onload nach");
 }
 

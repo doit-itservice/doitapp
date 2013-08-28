@@ -17,8 +17,13 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function speichern() 
 {
+	var DOITserver = document.getElementById("DOITserver").value;
+	if(DOITserver.substr(DOITserver.length-1,1) == "/") {
+		DOITserver = DOITserver.substr(0, DOITserver.length - 1);
+	}
+
 	window.localStorage.setItem("umkreis", document.getElementById("umkreis").value);
-	window.localStorage.setItem("DOITserver", document.getElementById("DOITserver").value);
+	window.localStorage.setItem("DOITserver", DOITserver);
 	window.localStorage.setItem("DOITuser", document.getElementById("DOITuser").value);
 	window.localStorage.setItem("DOITauthcode", document.getElementById("DOITauthcode").value);
 	location.href = "menue.html";
@@ -34,6 +39,22 @@ function onDeviceReady()
 	
 	var wert = window.localStorage.getItem("umkreis");
 	//$('select').val(window.localStorage.getItem("umkreis"));
+	
+	
+	if(wert > 1)
+	{
+			//$(document).ready(function(){
+		   //$('select').val('1000');
+		   $('#umkreis').val(wert).selectmenu('refresh');
+			// var myselect = $("select#umkreis");
+			// myselect[0].selectedIndex = 1;
+			// myselect.selectmenu("refresh");
+		//});
+	}
+	else
+	{
+		$('#umkreis').val('250').selectmenu('refresh');
+	}
 	
 	
 	/*
@@ -67,12 +88,12 @@ function onDeviceReady()
 }
 
 </script>
-<div align=center><br><br><br>
-DoIT-App-Server: <input type=text id="DOITserver"><br>
+<div align=center><br><h1>Einstellungen</h1><br>
+DoIT!-App-Server: <input type=text id="DOITserver"><br>
 Benutzername: <input type=text id="DOITuser"><br>
 Connection-AuthCode: <input type=text id="DOITauthcode"><br>
 <br>
-Umkreis<br>
+Umkreissuche<br>
 <select name="umkreis" id="umkreis">
 <option value="100">100m
 <option value="250">250m
@@ -84,11 +105,9 @@ Umkreis<br>
 <br>
 250m empfohlen<br>
 <br>
-<a href="javascript:speichern();">Speichern</a>
+<br>
+<input type="button" onclick="speichern();" value="Speichern">
+<br>
+Die Zugangsdaten finden Sie im DoIT! unter Start &#8658; DoIT!-App
 </div>
-<script>
-$(document).ready(function(){
-   $('select').val('1000');
-});
-</script>
 </body></html>

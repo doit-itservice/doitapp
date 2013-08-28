@@ -17,7 +17,9 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function speichern() 
 {
+	alert("speichern");
 	var DOITserver = document.getElementById("DOITserver").value;
+	alert(DOITserver);
 	if(DOITserver.substr(DOITserver.length-1,1) == "/") {
 		DOITserver = DOITserver.substr(0, DOITserver.length - 1);
 	}
@@ -26,6 +28,7 @@ function speichern()
 	window.localStorage.setItem("DOITserver", DOITserver);
 	window.localStorage.setItem("DOITuser", document.getElementById("DOITuser").value);
 	window.localStorage.setItem("DOITauthcode", document.getElementById("DOITauthcode").value);
+	alert("fertig");
 	location.href = "menue.html";
 }
 
@@ -50,10 +53,12 @@ function onDeviceReady()
 			// myselect[0].selectedIndex = 1;
 			// myselect.selectmenu("refresh");
 		//});
+		alert("hier");
 	}
 	else
 	{
 		$('#umkreis').val('250').selectmenu('refresh');
+		alert("da");
 	}
 	
 	

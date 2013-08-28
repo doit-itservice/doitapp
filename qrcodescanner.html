@@ -38,63 +38,50 @@ function handleOpenURL(url)
 
 function onBodyLoad()
 {
-document.addEventListener("deviceready", onDeviceReady, false);
-scanButton = document.getElementById("scan-button");
-resultSpan = document.getElementById("scan-result");
+	document.addEventListener("deviceready", onDeviceReady, false);
+	scanButton = document.getElementById("scan-button");
+	resultSpan = document.getElementById("scan-result");
 }
 
-/* When this function is called, PhoneGap has been initialized and is ready to roll */
-/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
-see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
-for more details -jm */
+	/* When this function is called, PhoneGap has been initialized and is ready to roll */
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
 function onDeviceReady()
 {
-// do your thing!
-navigator.notification.alert("PhoneGap is working");
+	// do your thing!
+	navigator.notification.alert("PhoneGap is working");
 
-/* Phonegap BarcodeScanner Plugin */
-try {
-scanner = cordova.require("cordova/plugin/BarcodeScanner");
-alert('scanner loaded');
-}
-catch(e) {
-alert('scanner could not be loaded');
-}
+	/* Phonegap BarcodeScanner Plugin */
+	try {
+	scanner = cordova.require("cordova/plugin/BarcodeScanner");
+	alert('scanner loaded');
+	}
+	catch(e) {
+	alert('scanner could not be loaded');
+	}
 
-scanButton.addEventListener("click", clickScan, false);
-//createButton.addEventListener("click", clickCreate, false);
+	scanButton.addEventListener("click", clickScan, false);
+	//createButton.addEventListener("click", clickCreate, false);
 
 }
 
 function clickScan() {
-
-try{
-scanner.scan(scannerSuccess, scannerFailure);
-}catch(e){
-alert(e.message);
-}
-
+	try{
+		scanner.scan(scannerSuccess, scannerFailure);
+		}catch(e){
+		alert(e.message);
+	}
 }
 
 //------------------------------------------------------------------------------
 function scannerSuccess(result) {
-navigator.notification.alert("Scan Success");
-console.log("scannerSuccess: result: " + result);
-resultSpan.innerText = "success: " + JSON.stringify(result);
-navigator.notification.alert(pruefsumme(result['text']));
+	navigator.notification.alert("Scan Success");
+	console.log("scannerSuccess: result: " + result);
+	//resultSpan.innerText = "success: " + JSON.stringify(result);
+	//navigator.notification.alert(pruefsumme(result['text']));
 
-}
-
-//------------------------------------------------------------------------------
-function scannerFailure(message) {
-navigator.notification.alert("Scan Fail");
-console.log("scannerFailure: message: " + message);
-resultSpan.innerText = "failure: " + JSON.stringify(message);
-}
-
-
-function pruefsumme(qrstring)
-{
+	var qrstring = result['text'];
 	var splitter = qrstring.split('#');
     var z = splitter[0].split('');
 
@@ -103,14 +90,20 @@ function pruefsumme(qrstring)
 	
 	if(quer == splitter[1])
 	{
-		return quer;
+		resultSpan.innerText = "Scan erfolgreich:<br>Inventarnummer: "+ splitter[0] +" Prüfziffer gültig";
 	}
 	else
 	{
-		return "Fehler";
-	}	
+		resultSpan.innerText = "WARNUNG:<br>Inventarnummer "+ splitter[0] +" ausgelesen, jedoch ist die Prüfziffer "+ splitter[1] +" ungültig";
+	}
 }
 
+//------------------------------------------------------------------------------
+function scannerFailure(message) {
+	navigator.notification.alert("Scan Fail");
+	console.log("scannerFailure: message: " + message);
+	resultSpan.innerText = "failure: " + JSON.stringify(message);
+}
 </script>
 </head>
 <body onload="onBodyLoad()">

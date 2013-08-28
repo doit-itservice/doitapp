@@ -14,17 +14,13 @@
 
 function onLoad()
 {
-	alert("onload vor");
 	document.addEventListener("deviceready", onDeviceReady(), false);
-	alert("onload nach");
 }
 
 
 function speichern() 
 {
-	alert("speichern");
 	var DOITserver = document.getElementById("DOITserver").value;
-	alert(DOITserver);
 	if(DOITserver.substr(DOITserver.length-1,1) == "/") {
 		DOITserver = DOITserver.substr(0, DOITserver.length - 1);
 	}
@@ -33,14 +29,12 @@ function speichern()
 	window.localStorage.setItem("DOITserver", DOITserver);
 	window.localStorage.setItem("DOITuser", document.getElementById("DOITuser").value);
 	window.localStorage.setItem("DOITauthcode", document.getElementById("DOITauthcode").value);
-	alert("fertig");
 	location.href = "menue.html";
 }
 
 
 function onDeviceReady()
 {
-	alert("laden");
 	document.getElementById("DOITserver").value = window.localStorage.getItem("DOITserver");
 	document.getElementById("DOITuser").value = window.localStorage.getItem("DOITuser");
 	document.getElementById("DOITauthcode").value = window.localStorage.getItem("DOITauthcode");
@@ -120,6 +114,5 @@ Umkreissuche<br>
 <input type="button" onclick="speichern();" value="Speichern">
 <br>
 Die Zugangsdaten finden Sie im DoIT! unter Start &#8658; DoIT!-App
-<br><a href="javascript:onDeviceReady();">test</a>
 </div>
 </body></html>

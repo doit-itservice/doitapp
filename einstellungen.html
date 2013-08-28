@@ -14,7 +14,9 @@
 
 function onLoad()
 {
+	alert("onload vor");
 	document.addEventListener("deviceready", onDeviceReady, false);
+	alert("onload nach");
 }
 
 
@@ -36,7 +38,7 @@ function speichern()
 }
 
 
-function onDeviceReady() 
+function onDeviceReady()
 {
 	alert("laden");
 	document.getElementById("DOITserver").value = window.localStorage.getItem("DOITserver");
@@ -118,5 +120,6 @@ Umkreissuche<br>
 <input type="button" onclick="speichern();" value="Speichern">
 <br>
 Die Zugangsdaten finden Sie im DoIT! unter Start &#8658; DoIT!-App
+<br><a href="javascript:onDeviceReady();">test</a>
 </div>
 </body></html>

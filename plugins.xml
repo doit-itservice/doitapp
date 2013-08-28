@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <plugins>
-	<!--
-    <plugin name="Geolocation" value="com.phonegap.GeoBroker"/>
-    <plugin name="Accelerometer" value="com.phonegap.AccelListener"/>
-    <plugin name="Network Status" value="com.phonegap.NetworkManager"/>
-	<plugin name="Storage" value="com.phonegap.Storage"/>
-		-->
-
-	<plugin name="App" value="com.phonegap.App"/>
+    <plugin name="App" value="com.phonegap.App"/>
     <plugin name="Geolocation" value="com.phonegap.GeoBroker"/>
     <plugin name="Device" value="com.phonegap.Device"/>
     <plugin name="Accelerometer" value="com.phonegap.AccelListener"/>
@@ -23,5 +16,4 @@
     <plugin name="Temperature" value="com.phonegap.TempListener"/>
     <plugin name="FileTransfer" value="com.phonegap.FileTransfer"/>
     <plugin name="Capture" value="com.phonegap.Capture"/>
-
 </plugins>

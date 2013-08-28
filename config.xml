@@ -3,7 +3,7 @@
 xmlns:gap = "http://phonegap.com/ns/1.0"
 id = "com.phonegap.example"
 versionCode="10" 
-version = "2.9.0">
+version = "2.5.0">
 
 
 
@@ -70,6 +70,7 @@ version = "2.9.0">
         <gap:plugin name="Example" />
         A list of available plugins are available at https://build.phonegap.com/docs/plugins
     -->
+		<gap:plugin name="com.phonegap.plugins.barcodescanner" />
 
     <!-- Define app icon for each platform. 
     <icon src="icon.png" />
@@ -106,5 +107,5 @@ version = "2.9.0">
         <access origin="http://phonegap.com" browserOnly="true" /> - only allows http://phonegap.com to be opened by the child browser.
     -->
 	
-	<gap:plugin name="com.phonegap.plugins.barcodescanner" />
+	
 </widget>

@@ -1,5 +1,5 @@
 <html>
-<body>
+<body onload="onLoad()">
 
 <link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
 <!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> 
@@ -12,7 +12,10 @@
 
 <script>
 
-document.addEventListener("deviceready", onDeviceReady, false);
+function onLoad()
+{
+	document.addEventListener("deviceready", onDeviceReady, false);
+}
 
 
 function speichern() 

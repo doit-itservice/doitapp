@@ -81,7 +81,8 @@ function scannerSuccess(result) {
 navigator.notification.alert("Scan Success");
 console.log("scannerSuccess: result: " + result);
 resultSpan.innerText = "success: " + JSON.stringify(result);
-alert( pruefsumme(result) );
+navigator.notification.alert(pruefsumme(result));
+
 }
 
 //------------------------------------------------------------------------------

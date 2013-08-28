@@ -3,6 +3,8 @@
     <plugin name="Geolocation" value="com.phonegap.GeoBroker"/>
     <plugin name="Accelerometer" value="com.phonegap.AccelListener"/>
     <plugin name="Network Status" value="com.phonegap.NetworkManager"/>
+	<plugin name="Storage" value="com.phonegap.Storage"/>
+	
 	<!--
 	<plugin name="App" value="com.phonegap.App"/>
     <plugin name="Geolocation" value="com.phonegap.GeoBroker"/>

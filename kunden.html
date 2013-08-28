@@ -70,6 +70,25 @@ function onError(error) {
 	        'message: ' + error.message + '\n');
 }
 
+
+function kundendetails(kundenid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_kundendetails.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			kundenid: kundenid
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data) { Ajax_return_Kunden(data); }
+	   });
+}
+
 function Ajax_Kunden(latitude, longitude, distance){
 	var DOITserver = window.localStorage.getItem("DOITserver");
 	var DOITuser = window.localStorage.getItem("DOITuser");

@@ -1,0 +1,56 @@
+<html>
+<head>
+
+</head>
+<body>
+
+<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+<script src="jquery-1.9.1.min.js"></script>
+<script src="jquery.mobile-1.3.2.min.js"></script>
+
+<script>
+function stoppuhr_alle(){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr_alle.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data) { Ajax_return(data); }
+	   });
+}
+
+function stoppuhr(stoppuhrid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			stoppuhrid: stoppuhrid
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data) { Ajax_return(data); }
+	   });
+}
+
+function Ajax_return(data){
+	document.getElementById("ajaxreturn").innerHTML = data;
+}
+
+stoppuhr_alle();
+</script>
+
+
+<div id="ajaxreturn"></div>
+</body></html>

@@ -1,0 +1,95 @@
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+
+<div id="map_canvas">
+</div>
+
+<script>
+//GET-Parameter aus der URL auslesen
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+var nach_lat = getURLParameter('nach_lat');
+var nach_lng = getURLParameter('nach_lng');
+
+
+function GoogleMap(){
+    this.initialize = function(von_lat, von_lng){
+        var map = showMap(von_lat, von_lng);
+        addMarkersToMap(map, von_lat, von_lng);
+    }    
+    
+    var addMarkersToMap = function(map, von_lat, von_lng){
+        var mapBounds = new google.maps.LatLngBounds();
+    
+        var latitudeAndLongitudeOne = new google.maps.LatLng(von_lat, von_lng);
+
+        var markerOne = new google.maps.Marker({
+					position: latitudeAndLongitudeOne,
+					map: map
+				});
+				
+		
+        var latitudeAndLongitudeTwo = new google.maps.LatLng(nach_lat, nach_lng);
+
+        var markerTwo = new google.maps.Marker({
+					position: latitudeAndLongitudeTwo,
+					map: map
+				});
+				
+		infowindow.open(map,markerTwo);
+				
+        mapBounds.extend(latitudeAndLongitudeOne);
+        mapBounds.extend(latitudeAndLongitudeTwo);
+        
+        map.fitBounds(mapBounds);
+    }
+    
+    
+    
+    var showMap = function(von_lat, von_lng){
+        var mapOptions = {
+			     zoom: 4,
+			     center: new google.maps.LatLng(von_lat, von_lng),
+			     mapTypeId: google.maps.MapTypeId.ROADMAP
+			 }
+			 
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        
+        return map;
+    }
+	
+	var contentString = '<div id="content">'+
+    '<h2 id="firstHeading" class="firstHeading">Kunde</h2>'+
+    '</div>';
+
+	var infowindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+
+	
+	
+	
+	}
+
+
+function GoogleMap_Init()
+{
+	navigator.geolocation.getCurrentPosition(onSuccess_GoogleMaps, onError_GoogleMaps,{ enableHighAccuracy: true });
+}
+
+var onSuccess_GoogleMaps = function(position){
+	var map = new GoogleMap();
+    map.initialize(position.coords.latitude, position.coords.longitude);
+}	
+
+
+var onError_GoogleMaps = function(position){
+	alert("Fehler");
+}
+
+GoogleMap_Init();
+
+</script>

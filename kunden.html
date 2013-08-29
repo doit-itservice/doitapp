@@ -47,6 +47,11 @@ p {
 <script src="jquery-1.9.1.min.js"></script>
 <script src="jquery.mobile-1.3.2.min.js"></script>
 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+
+
+
 <script>
 var onSuccess = function(position){
 	document.getElementById("karte").innerHTML = 'Latitude: '          + position.coords.latitude          + '<br>';
@@ -89,6 +94,68 @@ function kundendetails(kundenid){
 	   });
 }
 
+function stoppuhr_neu(kundenid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr_neu.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			kundenid: kundenid
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data)
+					{
+						navigator.notification.alert("Stoppuhr erzeugt");
+						stoppuhr(data);
+					}
+	   });
+}
+
+
+
+function stoppuhr_alle(kundenid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr_alle.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			kundenid: kundenid
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data) { Ajax_return_Kunden(data); }
+	   });
+}
+
+function stoppuhr(stoppuhrid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			stoppuhrid: stoppuhrid
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data) { Ajax_return_Kunden(data); }
+	   });
+}
+
+
+
 function Ajax_Kunden(latitude, longitude, distance){
 	var DOITserver = window.localStorage.getItem("DOITserver");
 	var DOITuser = window.localStorage.getItem("DOITuser");
@@ -113,7 +180,7 @@ function Ajax_return_Kunden(data){
 	document.getElementById("ajaxreturn").innerHTML = data;
 }
 
-//url: "http://webserver/doitappserver/ajax_kunden.php",
+
 
 function kundensuche(searchstring){
 	if(searchstring.length > 4){
@@ -140,7 +207,19 @@ function kundensuche(searchstring){
 		}
 	}
 }
+
+
+
+
+function GoogleMap_Init(nach_lat, nach_lng)
+{
+	location.href = "gmaps.html?nach_lat="+nach_lat+"&nach_lng="+nach_lng;
+}
+
 </script>
+
+
+
 
 <div align=center>
 	<input type="button" onclick="navigator.geolocation.getCurrentPosition(onSuccess, onError,{ enableHighAccuracy: true });" value="Orte mich!">
@@ -152,4 +231,5 @@ function kundensuche(searchstring){
 <div id="karte"></div>
 <hr>
 <div id="ajaxreturn"></div>
+
 </body></html>

@@ -50,7 +50,7 @@ function onBodyLoad()
 function onDeviceReady()
 {
 	// do your thing!
-	navigator.notification.alert("PhoneGap is working");
+	//navigator.notification.alert("PhoneGap is working");
 
 	/* Phonegap BarcodeScanner Plugin */
 	try {
@@ -76,11 +76,10 @@ function clickScan() {
 
 //------------------------------------------------------------------------------
 function scannerSuccess(result) {
-	navigator.notification.alert("Scan Success");
+	//navigator.notification.alert("Scan Success");
 	console.log("scannerSuccess: result: " + result);
 	//resultSpan.innerText = "success: " + JSON.stringify(result);
-	//navigator.notification.alert(pruefsumme(result['text']));
-
+	
 	var qrstring = result['text'];
 	var splitter = qrstring.split('#');
     var z = splitter[0].split('');
@@ -90,11 +89,11 @@ function scannerSuccess(result) {
 	
 	if(quer == splitter[1])
 	{
-		resultSpan.innerText = "Scan erfolgreich:<br>Inventarnummer: "+ splitter[0] +" Prüfziffer gültig";
+		resultSpan.innerHTML = "Scan erfolgreich:<br>Inventarnummer: "+ splitter[0] +" Pr&uuml;fziffer g&uuml;ltig";
 	}
 	else
 	{
-		resultSpan.innerText = "WARNUNG:<br>Inventarnummer "+ splitter[0] +" ausgelesen, jedoch ist die Prüfziffer "+ splitter[1] +" ungültig";
+		resultSpan.innerHTML = "WARNUNG:<br>Inventarnummer "+ splitter[0] +" ausgelesen, jedoch ist die Pr&uuml;fziffer "+ splitter[1] +" ung&uuml;ltig";
 	}
 }
 
@@ -113,7 +112,7 @@ function scannerFailure(message) {
 
 <button id="scan-button">QR-Code scannen</button>
 
-<p>scanned: <span id="scan-result">n/a</span>
+<p><span id="scan-result"></span>
 
 <div style="background:black; color:white" id="errorlog"> </div>
 

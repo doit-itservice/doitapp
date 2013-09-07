@@ -1,6 +1,7 @@
 <html>
 <head>
-
+<style type="text/css" ></style>
+       <link rel="stylesheet" href="./css/stylesheet.css" />
 </head>
 <body>
 
@@ -9,12 +10,41 @@
 <script src="jquery.mobile-1.3.2.min.js"></script>
 
 <script>
+//GET-Parameter aus der URL auslesen
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+var kundenid = getURLParameter('kundenid');
+var stoppuhrid = getURLParameter('stoppuhrid');
+
+//Boolean-Variable, damit der Intervall nicht mehrfach gestartet wird (1. wg. der Übersicht und 2. dann noch mal aus den Details ---- alles per AJAX, deshalb)
+var UhrRunning = false;
+
+//Alle Stoppuhren aus der DB holen - Entweder alle Stoppuhren eines bestimmten Kundens ODER alle Stoppuhren eines DoIT-Anwenders
 function stoppuhr_alle(){
 	var DOITserver = window.localStorage.getItem("DOITserver");
 	var DOITuser = window.localStorage.getItem("DOITuser");
 	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
 
-	$.ajax({
+	if(kundenid > 0)
+	{
+		$.ajax({
+			url: DOITserver+"/ajax_stoppuhr_alle.php",
+			data: {
+				DOITuser: DOITuser,
+				DOITauthcode: DOITauthcode,
+				kundenid: kundenid
+				  },
+			datatype: "json",
+			type: "POST",
+			success: function(data) { Ajax_return(data); }
+		   });
+	}
+	else
+	{
+		$.ajax({
 		url: DOITserver+"/ajax_stoppuhr_alle.php",
 		data: {
 			DOITuser: DOITuser,
@@ -24,8 +54,10 @@ function stoppuhr_alle(){
 		type: "POST",
 		success: function(data) { Ajax_return(data); }
 	   });
+	}
 }
 
+//Details einer bestimmten Stoppuhr holen
 function stoppuhr(stoppuhrid){
 	var DOITserver = window.localStorage.getItem("DOITserver");
 	var DOITuser = window.localStorage.getItem("DOITuser");
@@ -44,11 +76,141 @@ function stoppuhr(stoppuhrid){
 	   });
 }
 
-function Ajax_return(data){
-	document.getElementById("ajaxreturn").innerHTML = data;
+
+
+//Lässt die Zeit der Stoppuhren fortschreiten
+function uhr()
+{
+	var anzahl = document.getElementById('anzahl_stoppuhren').value;
+	for(i=0; i < anzahl; i++)
+	{
+		if(document.getElementById('runnig'+i).value == 'laeuft')
+		{
+			summe = parseInt(document.getElementById('zeitwert'+i).value) + 1;
+		}
+		else
+		{
+			summe = parseInt(document.getElementById('zeitwert'+i).value);
+		}
+		document.getElementById('zeitwert'+i).value = summe;
+
+		var timeleft = summe; //   3727   1h:2m:7s
+		//Umrechnung in Stunden, Minuten, Sekunden
+		hour = Math.floor(timeleft / 3600);
+		minute = Math.floor((timeleft%3600) / 60);
+		second = Math.floor(timeleft%60);
+
+		//Den String von Stunden, Minuten und Sekunden auf 2 Stellen ändern
+		if ( hour < 10 ) {
+			hour = '0'+hour;
+		}
+		if ( minute < 10 ) {
+			minute = '0'+minute;
+		}
+		if ( second < 10 ) {
+			second = '0'+second;
+		}
+		document.getElementById('zeitanzeige'+i).innerHTML =  hour + ':' + minute + ':' + second;
+	}
+	
 }
 
-stoppuhr_alle();
+//AJAX-Response wird auf der Seite eingeblendet
+//Außerdem wird ein Interval gestartet, damit die Stoppuhren für den Benutzer jede Sekunde auch optisch weiterlaufen
+function Ajax_return(data){
+	document.getElementById("ajaxreturn").innerHTML = data;
+	//window.setTimeout ('uhr()',1000);
+	if(UhrRunning == false)
+	{
+		aktiv = window.setInterval('uhr()',1000);
+		UhrRunning = true;
+	}
+}
+
+
+//Eine Stoppuhr in die Pause schicken
+function stoppuhr_stopp(stoppuhrid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr_worker.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			stoppuhrid: stoppuhrid,
+			aktion: 'stopp'
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function() {
+				alert("Stoppuhr gestoppt: "+stoppuhrid);
+				location.href = "stoppuhren.html?stoppuhrid="+stoppuhrid;
+			}
+	   });
+}
+
+//Eine Stoppuhr wieder starten
+function stoppuhr_fortsetzen(stoppuhrid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr_worker.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			stoppuhrid: stoppuhrid,
+			aktion: 'fortsetzen'
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function() {
+				alert("Stoppuhr fortgesetzt: "+stoppuhrid);
+				location.href = "stoppuhren.html?stoppuhrid="+stoppuhrid;
+			}
+	   });
+}
+
+//Einstiegspunkt auf dieser Seite - Alle Stoppuhren ODER eine bestimmte anzeigen?
+if(stoppuhrid > 0)
+{
+	stoppuhr(stoppuhrid);
+}
+else
+{
+	stoppuhr_alle();
+}
+
+//Notiz hinzufügen oder nur Titel aktualisieren; Die Zeit wird mitgesendet, damit die Notiz mit einem Zeitstempel versehen werden kann
+function NotizAdd(stoppuhrid)
+{
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr_worker.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			stoppuhrid: stoppuhrid,
+			zeit: document.getElementById("zeitwert0").value,
+			titel: document.getElementById("titel").value,
+			notizfeld: document.getElementById("notizfeld").value,
+			aktion: 'NotizAdd'
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function() {
+				alert("Notiz hinzugefügt / Titel aktualsiert");
+				location.href = "stoppuhren.html?stoppuhrid="+stoppuhrid;
+			}
+	   });
+}
+
 </script>
 
 

@@ -51,95 +51,77 @@ p {
 <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
 
 <script>
-var onSuccess = function(position){
-	document.getElementById("karte").innerHTML = 'Latitude: '          + position.coords.latitude          + '<br>';
-	document.getElementById("karte").innerHTML +=           'Longitude: '         + position.coords.longitude         + '<br>';
-	document.getElementById("karte").innerHTML +=          'Altitude: '          + position.coords.altitude          + '<br>';
-	document.getElementById("karte").innerHTML +=          'Accuracy: '          + position.coords.accuracy          + '<br>';
-	document.getElementById("karte").innerHTML +=          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br>';
-	document.getElementById("karte").innerHTML +=          'Heading: '           + position.coords.heading           + '<br>';
-	document.getElementById("karte").innerHTML +=          'Speed: '             + position.coords.speed             + '<br>';
-	document.getElementById("karte").innerHTML +=          'Timestamp: '         + position.timestamp                + '<br>';
-	
-	var umkreis = window.localStorage.getItem("umkreis");
-	if(umkreis < 1){umkreis = 250;}
-	document.getElementById("ajaxreturn").innerHTML = "Suche Kunden...";
-	Ajax_Kunden(position.coords.latitude, position.coords.longitude, umkreis);
-};
-
-function onError(error) {
-	alert('Lokalisierung nicht moeglich\n' +
-			'code: '    + error.code    + '\n' +
-	        'message: ' + error.message + '\n');
-}
-
 
 function kundendetails(kundenid){
-	location.href = "kunde_detail.html?kundenid="+kundenid;
-}
-
-
-function Ajax_Kunden(latitude, longitude, distance){
 	var DOITserver = window.localStorage.getItem("DOITserver");
 	var DOITuser = window.localStorage.getItem("DOITuser");
 	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
 
 	$.ajax({
-		url: DOITserver+"/ajax_kunden.php",
+		url: DOITserver+"/ajax_kundendetails.php",
 		data: {
 			DOITuser: DOITuser,
 			DOITauthcode: DOITauthcode,
-			latitude: latitude,
-			longitude: longitude,
-			distance: distance
+			kundenid: kundenid
 			  },
 		datatype: "json",
 		type: "POST",
 		success: function(data) { Ajax_return_Kunden(data); }
 	   });
 }
+
+function stoppuhr_neu(kundenid){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+
+	$.ajax({
+		url: DOITserver+"/ajax_stoppuhr_neu.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			kundenid: kundenid
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data)
+					{
+						navigator.notification.alert("Stoppuhr erzeugt");
+						stoppuhr(data);
+					}
+	   });
+}
+
+function stoppuhr_alle(kundenid){
+	location.href = "stoppuhren.html?kundenid="+kundenid;
+}
+
+function stoppuhr(stoppuhrid){
+	location.href = "stoppuhren.html?stoppuhrid="+stoppuhrid;
+}
 		
 function Ajax_return_Kunden(data){
 	document.getElementById("ajaxreturn").innerHTML = data;
 }
 
-function kundensuche(searchstring){
-	if(searchstring.length > 4){
-		var DOITserver = window.localStorage.getItem("DOITserver");
-		if(DOITserver != "")
-		{
-			var DOITuser = window.localStorage.getItem("DOITuser");
-			var DOITauthcode = window.localStorage.getItem("DOITauthcode");
-			$.ajax({
-				url: DOITserver+"/ajax_kunden.php",
-				data: {
-					DOITuser: DOITuser,
-					DOITauthcode: DOITauthcode,
-					kundensuche: searchstring  
-					},
-				datatype: "json",
-				type: "POST",
-				success: function(data) { Ajax_return_Kunden(data); }
-			});
-		}
-		else
-		{
-			navigator.notification.alert("Bitte Einstellungen überprüfen! Kein DoIT!-App-Server hinterlegt.");
-		}
-	}
+function GoogleMap_Init(nach_lat, nach_lng)
+{
+	location.href = "gmaps.html?nach_lat="+nach_lat+"&nach_lng="+nach_lng;
 }
+
+//GET-Parameter aus der URL auslesen
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+var kundenid = getURLParameter('kundenid');
+
+
+kundendetails(kundenid);
 
 </script>
 
-<div align=center>
-	<input type="button" onclick="navigator.geolocation.getCurrentPosition(onSuccess, onError,{ enableHighAccuracy: true });" value="Orte mich!">
-</div>
-<br>
-
-<input type="text" name="kundensuche" placeholder="Kundenname" onkeyup="kundensuche(this.value);">
-
-<div id="karte"></div>
-<hr>
 <div id="ajaxreturn"></div>
 
 </body></html>

@@ -31,6 +31,8 @@ function GoogleMap(){
 					map: map
 				});
 				
+		infowindow_standort.open(map,markerOne);
+				
 		
         var latitudeAndLongitudeTwo = new google.maps.LatLng(nach_lat, nach_lng);
 
@@ -39,7 +41,7 @@ function GoogleMap(){
 					map: map
 				});
 				
-		infowindow.open(map,markerTwo);
+		infowindow_ziel.open(map,markerTwo);
 				
         mapBounds.extend(latitudeAndLongitudeOne);
         mapBounds.extend(latitudeAndLongitudeTwo);
@@ -65,8 +67,12 @@ function GoogleMap(){
     '<h2 id="firstHeading" class="firstHeading">Kunde</h2>'+
     '</div>';
 
-	var infowindow = new google.maps.InfoWindow({
-		content: contentString
+	var infowindow_standort = new google.maps.InfoWindow({
+		content: '<div id="content">Standort</div>'
+	});
+	
+	var infowindow_ziel = new google.maps.InfoWindow({
+		content: '<div id="content">Ziel</div>'
 	});
 
 	

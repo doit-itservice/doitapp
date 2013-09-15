@@ -1,0 +1,66 @@
+<html>
+<head>
+<style type="text/css">
+
+.main_menu{padding-bottom:0px}
+.main_menu ul{float:left;position:relative;z-index:100}
+.main_menu p{float:left;font-size:14px;line-height:16px;font-family:"Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif}
+.main_menu p img{display:block}
+.main_menu h2 img{display:inline}
+.main_menu p a,
+.main_menu p a:hover{padding:10px 31px;display:block;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border:1px solid #b9b9b9;border-left:0 none}
+.main_menu p a{background:#d1d1d1 url(bg_menu.gif) repeat-x left top}
+.main_menu p.first a,
+.main_menu p.first a:hover{display:block;padding:10px 31px;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border-left:1px solid #b9b9b9}
+.main_menu p.last a,
+.main_menu p.last a:hover{padding:10px 31px}
+.main_menu p a:hover,
+.main_menu p.selected a,
+.main_menu p.dropdown_hovered a{background:#fff url(bg_menu_hover.gif) repeat-x left top;text-decoration:none}
+.main_menu p.has_dropdown a:hover,
+.main_menu p.dropdown_hovered a{border-bottom:1px solid #fff}
+.main_menu p.first,
+.main_menu p.first a,
+.main_menu p.first a:hover{-moz-border-radius:8px 0 0 8px;-webkit-border-radius:8px 0 0 8px;border-radius:8px 0 0 8px}
+.main_menu p.last,
+.main_menu p.last a,
+.main_menu p.last a:hover{-moz-border-radius:0 8px 8px 0;-webkit-border-radius:0 8px 8px 0;border-radius:0 8px 8px 0}
+
+.main_menu p.firstlast a,
+.main_menu p.firstlast a:hover{display:block;padding:10px 31px;line-height:16px;color:#2f2f2f;text-shadow:#fff 0 1px 1px;border-left:1px solid #b9b9b9}
+.main_menu p.firstlast,
+.main_menu p.firstlast a,
+.main_menu p.firstlast a:hover{-moz-border-radius:8px 8px 8px 8px;-webkit-border-radius:8px 8px 8px 8px;border-radius:8px 8px 8px 8px}
+
+
+a { text-decoration: none; }
+p {
+    list-style: none outside none;
+	width: 100%;
+}
+
+</style>
+</head>
+<body>
+
+<link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+<script src="jquery-1.9.1.min.js"></script>
+<script src="jquery.mobile-1.3.2.min.js"></script>
+
+<script>
+//GET-Parameter aus der URL auslesen
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+}
+var invnr = getURLParameter('invnr');
+document.getElementById("ajaxreturn").innerHTML = invnr;
+
+
+
+</script>
+
+<div id="ajaxreturn"></div>
+
+</body></html>

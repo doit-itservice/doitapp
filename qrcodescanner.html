@@ -90,6 +90,9 @@ function scannerSuccess(result) {
 	if(quer == splitter[1])
 	{
 		resultSpan.innerHTML = "Scan erfolgreich:<br>Inventarnummer: "+ splitter[0] +" Pr&uuml;fziffer g&uuml;ltig";
+		alert("Debug: " + resultSpan.innerHTML);
+		location.href="inventar.html?invnr="+splitter[0];
+		
 	}
 	else
 	{

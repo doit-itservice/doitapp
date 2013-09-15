@@ -41,11 +41,13 @@ p {
 
 </style>
 </head>
-<body>
+<body onload="inventardaten()">
 
 <link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
 <script src="jquery-1.9.1.min.js"></script>
 <script src="jquery.mobile-1.3.2.min.js"></script>
+
+<div id="ajaxreturn"></div>
 
 <script>
 //GET-Parameter aus der URL auslesen
@@ -54,13 +56,39 @@ function getURLParameter(name) {
         (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
     );
 }
-var invnr = getURLParameter('invnr');
-document.getElementById("ajaxreturn").innerHTML = invnr;
+
+function inventardaten(){
+	var DOITserver = window.localStorage.getItem("DOITserver");
+	var DOITuser = window.localStorage.getItem("DOITuser");
+	var DOITauthcode = window.localStorage.getItem("DOITauthcode");
+	
+	var invnr = getURLParameter('invnr');
+
+	$.ajax({
+		url: DOITserver+"/ajax_inventar.php",
+		data: {
+			DOITuser: DOITuser,
+			DOITauthcode: DOITauthcode,
+			invnr: invnr
+			  },
+		datatype: "json",
+		type: "POST",
+		success: function(data) { 
+									document.getElementById("ajaxreturn").innerHTML = data;
+								}
+	   });
+}
+
 
 
 
 </script>
-
-<div id="ajaxreturn"></div>
-
+<br><br><br>
+Folgende Optionen:<br>
+- Stoppuhr zum Inventar starten<br>
+- laufende Stoppuhren zum Inventar anzeigen<br>
+- Alle Tickets zu dieser Inventarnummer anzeigen<br>
+- ERST-Inventarisierung zur Inventarnummer durchf&uuml;hren<br>
+- (Inventardaten bearbeiten)<br>
+- FOTO zum Kunden machen und hochladen (Foto lokal auf dem Handy speichern, sobald WLAN-Verbindung vorhanden dann uploaden)<br>
 </body></html>

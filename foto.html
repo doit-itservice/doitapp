@@ -58,18 +58,22 @@
 
     // Upload files to server
     function uploadFile(mediaFile) {
-        var ft = new FileTransfer(),
-            path = mediaFile.fullPath,
-            name = mediaFile.name;
-		
-		alert('olli1: ' + path);
-		
+		alert('ollimarker123: ');
 		//////////////////********/////////////
 		var options = new FileUploadOptions();
 		options.fileName=fileURI.substr(fileURI.lastIndexOf('/')+1);
 		var params = {}; params.value1 = "test"; params.value2 = "param";
 		options.params = params;
 		//////////////////********/////////////
+		
+		
+        var ft = new FileTransfer(),
+            path = mediaFile.fullPath,
+            name = mediaFile.name;
+		
+		alert('olli1: ' + path);
+		
+
 		
 		
         ft.upload(path,

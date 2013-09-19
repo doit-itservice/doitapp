@@ -22,22 +22,10 @@
 		
 		if(states[networkState] == 'WiFi connection')
 		{
-			navigator.notification.alert(
-				'Keine Internetverbindung: ' + states[networkState],  // message
-				alertDismissed,         // callback
-				'Hinweis',            // title
-				'OK'                  // buttonName
-			);
 			alert('WLAN');
 		}
 		else
 		{
-			navigator.notification.alert(
-				'Kein WLAN Keine Internetverbindung: ' + states[networkState],  // message
-				alertDismissed,         // callback
-				'Hinweis',            // title
-				'OK'                  // buttonName
-			);
 			alert('Kein WLAN');
 		}
     }

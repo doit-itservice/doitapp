@@ -38,13 +38,16 @@
             name = mediaFile.name;
 
         ft.upload(path,
-            "http://my.domain.com/upload.php",
+            "http://webserver/uploadfoto.php",
             function(result) {
+			alert('Upload success: ' + result.responseCode);
+			alert(result.bytesSent + ' bytes sent');
                 console.log('Upload success: ' + result.responseCode);
                 console.log(result.bytesSent + ' bytes sent');
             },
             function(error) {
-                console.log('Error uploading file ' + path + ': ' + error.code);
+                alert('Error uploading file ' + path + ': ' + error.code);
+				console.log('Error uploading file ' + path + ': ' + error.code);
             },
             { fileName: name });
     }

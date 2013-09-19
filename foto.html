@@ -50,7 +50,7 @@
 		showAlert();
         var i, len;
 		
-		
+		window.localStorage.setItem("Numberofpics", 0);
 		var keyname123 = window.localStorage.getItem("Numberofpics");
 		  alert('hi'); alert(keyname123);
 		  alert('mediaFiles.length: ' + mediaFiles.length);
@@ -69,7 +69,8 @@
         for (i = 0, len = mediaFiles.length; i < len; i ++) {
 			summe = parseInt(keyname123) + parseInt(i);
 			alert('bin hier' + summe);
-			window.localStorage.setItem("PIC"+summe, mediaFile[i].fullPath); //'test'+i);
+			indexfeld = "PIC" + summe;
+			window.localStorage.setItem(indexfeld, mediaFile[i].fullPath); //'test'+i);
             //uploadFile(mediaFiles[i]);
         }
 		alert('fertig');

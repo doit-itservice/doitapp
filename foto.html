@@ -53,9 +53,11 @@
 		
 		var keyname123 = window.localStorage.getItem("Numberofpics");
 		  alert('hi'); alert(keyname123);
+		  alert('mediaFiles.length: ' + mediaFiles.length);
 		  if(keyname123 > 0)
 		  { 
-				window.localStorage.setItem("Numberofpics", keyname123 + mediaFiles.length);
+				summe = parseInt(keyname123) + parseInt(mediaFiles.length);
+				window.localStorage.setItem("Numberofpics", summe);
 		  }
 		  else
 		  {
@@ -64,18 +66,20 @@
 		  }
 		
 		
-        for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-			window.localStorage.setItem("PIC"+keyname123+i, mediaFile[i].fullPath);
+        for (i = 0, len = mediaFiles.length; i < len; i ++) {
+			summe = parseInt(keyname123) + parseInt(i);
+			alert('bin hier' + summe);
+			window.localStorage.setItem("PIC"+summe, mediaFile[i].fullPath); //'test'+i);
             //uploadFile(mediaFiles[i]);
         }
 		alert('fertig');
 		alert('nun die ausgabe');
 					  var keyname123 = window.localStorage.getItem("Numberofpics");
-			  alert('hi'); alert(keyname123);
+		
 			  if(keyname123 > 0)
 			  {  alert('hi1'); 
 				    for (i = 0; i < keyname123; i++) {
-						alert(window.localStorage.getItem("PIC"+i));
+						alert("index "+i+": " + window.localStorage.getItem("PIC"+i));
 					}
 			  }
 			  alert('fertig - absolute');
@@ -169,5 +173,9 @@
     <body>
         <button onclick="captureImage();">Capture Image</button> <br>
 		<a href="javascript:captureImage();">Capture Image</a>
+		<br><br><br><br><br>
+		<a href="javascript:captureSuccess('1');">111111111111</a> <br> <br>
+				<a href="javascript:captureSuccess('12');">2222222222</a>
+		
     </body>
 </html>

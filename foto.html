@@ -63,7 +63,15 @@
             name = mediaFile.name;
 		
 		alert('olli1: ' + path);
-
+		
+		//////////////////********/////////////
+		var options = new FileUploadOptions();
+		options.fileName=fileURI.substr(fileURI.lastIndexOf('/')+1);
+		var params = {}; params.value1 = "test"; params.value2 = "param";
+		options.params = params;
+		//////////////////********/////////////
+		
+		
         ft.upload(path,
             "http://webserver/uploadfoto.php",
             function(result) {
@@ -101,7 +109,8 @@
                 alert('Error uploading file ' + path + ': ' + error.code);
 				console.log('Error uploading file ' + path + ': ' + error.code);
             },
-            { fileName: name });
+			options);
+			//{ fileName: name });
 				
     }
 

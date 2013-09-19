@@ -58,13 +58,8 @@
 
     // Upload files to server
     function uploadFile(mediaFile) {
-		alert('ollimarker123: ');
-		//////////////////********/////////////
-		var options = new FileUploadOptions();
-		options.fileName=fileURI.substr(fileURI.lastIndexOf('/')+1);
-		var params = {}; params.value1 = "test"; params.value2 = "param";
-		options.params = params;
-		//////////////////********/////////////
+	
+		
 		
 		
         var ft = new FileTransfer(),
@@ -72,6 +67,16 @@
             name = mediaFile.name;
 		
 		alert('olli1: ' + path);
+		//////////////////********/////////////
+		var options = new FileUploadOptions();
+			alert('ollimarker111: ');
+		options.fileName=name;
+			alert('ollimarker222: ');
+		var params = {}; params.value1 = "test"; params.value2 = "param";
+			alert('ollimarker333: ');
+		options.params = params;
+			alert('ollimarker444: ');
+		//////////////////********/////////////
 		
 
 		

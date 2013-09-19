@@ -50,6 +50,10 @@
 				console.log('Error uploading file ' + path + ': ' + error.code);
             },
             { fileName: name });
+			
+		entry.remove(function() {
+                    navigator.notification.alert(entry.toURI(), null, 'Entry deleted');                    
+                }, navigator.notification.alert(entry.toURI(), null, 'error'); );
     }
 
     </script>

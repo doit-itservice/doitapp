@@ -36,6 +36,8 @@
         var ft = new FileTransfer(),
             path = mediaFile.fullPath,
             name = mediaFile.name;
+		
+		alert('pfad:' + path);
 
         ft.upload(path,
             "http://webserver/uploadfoto.php",
@@ -51,9 +53,32 @@
             },
             { fileName: name });
 			
+			
+			
+	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+    window.resolveLocalFileSystemURI(path, onResolveSuccess, fail);
+    
+
+    function onFileSystemSuccess(fileSystem) {
+        alert("2"+fileSystem.name);
+    }
+
+    function onResolveSuccess(fileEntry) {
+        alert("3"+fileEntry.name);
 		entry.remove(function() {
                     navigator.notification.alert(entry.toURI(), null, 'Entry deleted');                    
-                }, navigator.notification.alert(entry.toURI(), null, 'error'); );
+                }, function() {
+                    navigator.notification.alert(entry.toURI(), null, 'ERROR 666 Entry deleted');                    
+                });
+	}
+				
+				
+	
+	function fail()
+	{alert("ups");}
+	
+			
+		
     }
 
     </script>

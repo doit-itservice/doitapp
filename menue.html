@@ -30,12 +30,13 @@
 		
 		if((states[networkState] == 'Unknown connection') || (states[networkState] == 'Cell generic connection') || (states[networkState] == 'No network connection'))
 		{
-			navigator.notification.alert(
+			/*navigator.notification.alert(
 				'Keine Internetverbindung: ' + states[networkState],  // message
 				alertDismissed,         // callback
 				'Hinweis',            // title
 				'OK'                  // buttonName
-			);
+			);*/
+			alert('Keine Internetverbindung: ' + states[networkState]);
 		}
     }
 

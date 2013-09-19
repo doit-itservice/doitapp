@@ -6,6 +6,19 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="json2.js"></script>
     <script type="text/javascript" charset="utf-8">
+
+     
+
+
+/*
+        var keyname = window.localStorage.key(i);
+        // keyname is now equal to "key"
+        var value = window.localStorage.getItem("key");
+        // value is now equal to "value"
+        window.localStorage.removeItem("key");
+        window.localStorage.setItem("key2", "value2");
+*/
+
 	
 	function showAlert() {
 		var networkState = navigator.network.connection.type;
@@ -36,9 +49,37 @@
     function captureSuccess(mediaFiles) {
 		showAlert();
         var i, len;
+		
+		
+		var keyname123 = window.localStorage.getItem("Numberofpics");
+		  alert('hi'); alert(keyname123);
+		  if(keyname123 > 0)
+		  { 
+				window.localStorage.setItem("Numberofpics", keyname123 + mediaFiles.length);
+		  }
+		  else
+		  {
+				window.localStorage.setItem("Numberofpics", mediaFiles.length);
+				keyname123 = 0;
+		  }
+		
+		
         for (i = 0, len = mediaFiles.length; i < len; i += 1) {
-            uploadFile(mediaFiles[i]);
+			window.localStorage.setItem("PIC"+keyname123+i, mediaFile[i].fullPath));
+            //uploadFile(mediaFiles[i]);
         }
+		alert('fertig');
+		alert('nun die ausgabe');
+					  var keyname123 = window.localStorage.getItem("Numberofpics");
+			  alert('hi'); alert(keyname123);
+			  if(keyname123 > 0)
+			  {  alert('hi1'); 
+				    for (i = 0; i < keyname123; i++) {
+						alert(window.localStorage.getItem("PIC"+i));
+					}
+			  }
+			  alert('fertig - absolute');
+			  
     }
 
     // Called if something bad happens.

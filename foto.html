@@ -37,48 +37,47 @@
             path = mediaFile.fullPath,
             name = mediaFile.name;
 		
-		alert('pfad:' + path);
+		alert('olli1: ' + path);
 
         ft.upload(path,
             "http://webserver/uploadfoto.php",
             function(result) {
-			alert('Upload success: ' + result.responseCode);
-			alert(result.bytesSent + ' bytes sent');
+				alert('Upload success: ' + result.responseCode);
+				alert(result.bytesSent + ' bytes sent');
                 console.log('Upload success: ' + result.responseCode);
                 console.log(result.bytesSent + ' bytes sent');
+				
+				////////////////////////////////////////////////			
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
+				window.resolveLocalFileSystemURI(path, onResolveSuccess, fail);
+
+				function onFileSystemSuccess(fileSystem) {
+					alert("olli2: "+fileSystem.name);
+				}
+
+				function onResolveSuccess(fileEntry) {
+					alert("olli3: "+fileEntry.name);
+					fileEntry.remove(function() {
+								navigator.notification.alert(entry.toURI(), null, 'Entry deleted');                    
+							}, function() {
+								navigator.notification.alert(entry.toURI(), null, 'ERROR 666 Entry deleted');                    
+							});
+				}
+							
+							
+				
+				function fail()
+				{alert("olli 234 ups");}
+				////////////////////////////////////////////////	
+				
+				
             },
             function(error) {
                 alert('Error uploading file ' + path + ': ' + error.code);
 				console.log('Error uploading file ' + path + ': ' + error.code);
             },
             { fileName: name });
-			
-			
-			
-	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
-    window.resolveLocalFileSystemURI(path, onResolveSuccess, fail);
-    
-
-    function onFileSystemSuccess(fileSystem) {
-        alert("2"+fileSystem.name);
-    }
-
-    function onResolveSuccess(fileEntry) {
-        alert("3"+fileEntry.name);
-		entry.remove(function() {
-                    navigator.notification.alert(entry.toURI(), null, 'Entry deleted');                    
-                }, function() {
-                    navigator.notification.alert(entry.toURI(), null, 'ERROR 666 Entry deleted');                    
-                });
-	}
 				
-				
-	
-	function fail()
-	{alert("ups");}
-	
-			
-		
     }
 
     </script>

@@ -51,19 +51,6 @@ function speichern()
 
 function onDeviceReady()
 {
-
-	try {
-	scanner = cordova.require("cordova/plugin/BarcodeScanner");
-	alert('scanner loaded');
-	}
-	catch(e) {
-	alert('scanner could not be loaded');
-	}
-	scanButton.addEventListener("click", clickScan, false);
-	
-	
-	
-	
 	document.getElementById("DOITserver").value = window.localStorage.getItem("DOITserver");
 	document.getElementById("DOITuser").value = window.localStorage.getItem("DOITuser");
 	document.getElementById("DOITauthcode").value = window.localStorage.getItem("DOITauthcode");
@@ -87,6 +74,22 @@ function onDeviceReady()
 	{
 		$('#umkreis').val('250').selectmenu('refresh');
 	}
+	
+	
+	
+	
+	
+	try {
+		scanner = cordova.require("cordova/plugin/BarcodeScanner");
+		alert('scanner loaded');
+	}
+	catch(e) {
+		alert('scanner could not be loaded'+e.message);
+	}
+	scanButton.addEventListener("click", clickScan, false);
+	
+	
+	
 	
 	
 	/*

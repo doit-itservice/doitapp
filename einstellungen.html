@@ -90,23 +90,11 @@ function scannerSuccess(result) {
 	//resultSpan.innerText = "success: " + JSON.stringify(result);
 	
 	var qrstring = result['text'];
-	var splitter = qrstring.split('#');
-    var z = splitter[0].split('');
+	var splitter = qrstring.split('***');
 
-    var quer = 0;
-    for(var i = 0; i < z.length; i++) quer += Number(z[i]);
-	
-	if(quer == splitter[1])
-	{
-		resultSpan.innerHTML = "Scan erfolgreich:<br>Inventarnummer: "+ splitter[0] +" Pr&uuml;fziffer g&uuml;ltig";
-		alert("Debug: " + resultSpan.innerHTML);
-		location.href="inventar.html?invnr="+splitter[0];
-		
-	}
-	else
-	{
-		resultSpan.innerHTML = "WARNUNG:<br>Inventarnummer "+ splitter[0] +" ausgelesen, jedoch ist die Pr&uuml;fziffer "+ splitter[1] +" ung&uuml;ltig";
-	}
+   	document.getElementById("DOITserver").value = splitter[0];
+	document.getElementById("DOITuser").value = splitter[1];
+	document.getElementById("DOITauthcode").value = splitter[2];   
 }
 
 //------------------------------------------------------------------------------

@@ -58,10 +58,7 @@ function onBodyLoad()
 	for more details -jm */
 function onDeviceReady()
 {
-	// do your thing!
 	//navigator.notification.alert("PhoneGap is working");
-
-	/* Phonegap BarcodeScanner Plugin */
 	try {
 	scanner = cordova.require("cordova/plugin/BarcodeScanner");
 	alert('scanner loaded');
@@ -71,8 +68,11 @@ function onDeviceReady()
 	}
 
 	scanButton.addEventListener("click", clickScan, false);
-	//createButton.addEventListener("click", clickCreate, false);
 
+
+	document.getElementById("DOITserver").value = window.localStorage.getItem("DOITserver");
+	document.getElementById("DOITuser").value = window.localStorage.getItem("DOITuser");
+	document.getElementById("DOITauthcode").value = window.localStorage.getItem("DOITauthcode");
 }
 
 function clickScan() {
@@ -106,6 +106,19 @@ function scannerFailure(message) {
 
 
 
+function speichern() 
+{
+	var DOITserver = document.getElementById("DOITserver").value;
+	if(DOITserver.substr(DOITserver.length-1,1) == "/") {
+		DOITserver = DOITserver.substr(0, DOITserver.length - 1);
+	}
+
+	window.localStorage.setItem("umkreis", document.getElementById("umkreis").value);
+	window.localStorage.setItem("DOITserver", DOITserver);
+	window.localStorage.setItem("DOITuser", document.getElementById("DOITuser").value);
+	window.localStorage.setItem("DOITauthcode", document.getElementById("DOITauthcode").value);
+	location.href = "menue.html";
+}
 
 
 

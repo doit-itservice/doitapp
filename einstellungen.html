@@ -73,6 +73,20 @@ function onDeviceReady()
 	document.getElementById("DOITserver").value = window.localStorage.getItem("DOITserver");
 	document.getElementById("DOITuser").value = window.localStorage.getItem("DOITuser");
 	document.getElementById("DOITauthcode").value = window.localStorage.getItem("DOITauthcode");
+	
+	alert('wert');
+	var wert = window.localStorage.getItem("umkreis");
+	alert('wert '+wert);
+	if(wert > 1)
+	{
+	   $('#umkreis').val(wert).selectmenu('refresh');
+	}
+	else
+	{
+		$('#umkreis').val('250').selectmenu('refresh');
+	}
+	
+	
 }
 
 function clickScan() {

@@ -15,8 +15,9 @@ function onDeviceReady() {
 
 
 function showAlert() {
-	//var networkState = navigator.network.connection.type;
-	var networkState = navigator.connection.type;
+	alert(1);
+	var networkState = navigator.network.connection.type;
+	//var networkState = navigator.connection.type;
 	
 	var states = {};
 	states[Connection.UNKNOWN]  = 'Unknown connection';

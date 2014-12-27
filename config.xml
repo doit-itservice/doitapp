@@ -24,8 +24,10 @@ version = "2.5.0">
 -->
 
 
-	<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-    <name>DoIT! - Ticket and Time</name>
+	<!-- config.xml reference: https://build.phonegap.com/docs/config-xml
+	<name>DoIT! - Ticket and Time</name>
+	-->
+    <name>DoIT!</name>
 
 	<description>
 		Die Client-App für das Ticketsystem DoIT!

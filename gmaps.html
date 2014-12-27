@@ -1,7 +1,14 @@
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<html>
+<body>
 
-<div id="map_canvas">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<!--
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+-->
+
+<div id="map-canvas">
 </div>
 
 <script>
@@ -18,6 +25,7 @@ var nach_lng = getURLParameter('nach_lng');
 function GoogleMap(){
     this.initialize = function(von_lat, von_lng){
         var map = showMap(von_lat, von_lng);
+		alert(von_lat);
         addMarkersToMap(map, von_lat, von_lng);
     }    
     
@@ -58,7 +66,7 @@ function GoogleMap(){
 			     mapTypeId: google.maps.MapTypeId.ROADMAP
 			 }
 			 
-        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
         
         return map;
     }
@@ -84,11 +92,13 @@ function GoogleMap(){
 function GoogleMap_Init()
 {
 	navigator.geolocation.getCurrentPosition(onSuccess_GoogleMaps, onError_GoogleMaps,{ enableHighAccuracy: true });
+	
 }
 
 var onSuccess_GoogleMaps = function(position){
 	var map = new GoogleMap();
     map.initialize(position.coords.latitude, position.coords.longitude);
+	alert(position.coords.latitude);
 }	
 
 

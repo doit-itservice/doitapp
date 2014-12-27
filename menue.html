@@ -1,60 +1,52 @@
 <html>
 <head>
-<script type="text/javascript" charset="utf-8">
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    function onDeviceReady() {
-        //checkConnection();
-		//alert(navigator.connection);
-		showAlert();
-    }
-	
-	  function alertDismissed() {
-        // do something
-    }
-
-    // Show a custom alertDismissed
-    //
-    function showAlert() {
-		var networkState = navigator.network.connection.type;
-
-		var states = {};
-		states[Connection.UNKNOWN]  = 'Unknown connection';
-		states[Connection.ETHERNET] = 'Ethernet connection';
-		states[Connection.WIFI]     = 'WiFi connection';
-		states[Connection.CELL_2G]  = 'Cell 2G connection';
-		states[Connection.CELL_3G]  = 'Cell 3G connection';
-		states[Connection.CELL_4G]  = 'Cell 4G connection';
-		states[Connection.CELL]     = 'Cell generic connection';
-		states[Connection.NONE]     = 'No network connection';
-		
-		if((states[networkState] == 'Unknown connection') || (states[networkState] == 'Cell generic connection') || (states[networkState] == 'No network connection'))
-		{
-			/*navigator.notification.alert(
-				'Keine Internetverbindung: ' + states[networkState],  // message
-				alertDismissed,         // callback
-				'Hinweis',            // title
-				'OK'                  // buttonName
-			);*/
-			alert('Keine Internetverbindung: ' + states[networkState]);
-		}
-    }
-
-	
-
-
-
-</script>
-</head>
-<body>
-
 <link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
 <script src="jquery-1.9.1.js"></script>
 <script src="jquery.mobile-1.3.2.js"></script>
 
-<div align=center>
+<script type="text/javascript" charset="utf-8">
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+	//checkConnection();
+	//alert(navigator.connection);
+	showAlert();
+}
+
+
+function showAlert() {
+	//var networkState = navigator.network.connection.type;
+	var networkState = navigator.connection.type;
+	
+	var states = {};
+	states[Connection.UNKNOWN]  = 'Unknown connection';
+	states[Connection.ETHERNET] = 'Ethernet connection';
+	states[Connection.WIFI]     = 'WiFi connection';
+	states[Connection.CELL_2G]  = 'Cell 2G connection';
+	states[Connection.CELL_3G]  = 'Cell 3G connection';
+	states[Connection.CELL_4G]  = 'Cell 4G connection';
+	states[Connection.CELL]     = 'Cell generic connection';
+	states[Connection.NONE]     = 'No network connection';
+	
+	if((states[networkState] == 'Unknown connection') || (states[networkState] == 'Cell generic connection') || (states[networkState] == 'No network connection'))
+	{
+		/*navigator.notification.alert(
+			'Keine Internetverbindung: ' + states[networkState],  // message
+			alertDismissed,         // callback
+			'Hinweis',            // title
+			'OK'                  // buttonName
+		);*/
+		alert('Keine Internetverbindung: ' + states[networkState]);
+	}
+	
+	alert('xxx Internetverbindung: ' + states[networkState]);
+}
+</script>
+</head>
+<body>
+<div align="center">
 	<br><img src="logo_doit.png" /><br><br><br>
-	<div align=center>
+	<div align="center">
 		<input type="button" onclick="location.href='stoppuhren.html';" value="Stoppuhren anzeigen"><br><br>
 		<input type="button" onclick="location.href='kunden.html';" value="Kunden suchen"><br><br>
 		<input type="button" onclick="location.href='qrcodescanner.html';" value="QR-Code-Scanner - Inventar"><br><br><br><br><br>

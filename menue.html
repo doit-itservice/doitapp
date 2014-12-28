@@ -1,23 +1,29 @@
 <html>
 <head>
 <link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
+
+
+<script src="cordova.js"></script>
 <script src="jquery-1.9.1.js"></script>
 <script src="jquery.mobile-1.3.2.js"></script>
 
 <script type="text/javascript" charset="utf-8">
-document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 	//checkConnection();
 	//alert(navigator.connection);
+	
+	
 	showAlert();
+
+	
 }
 
 
 function showAlert() {
 	alert(1);
-	var networkState = navigator.network.connection.type;
-	//var networkState = navigator.connection.type;
+	//var networkState = navigator.network.connection.type;
+	var networkState = navigator.connection.type;
 	
 	var states = {};
 	states[Connection.UNKNOWN]  = 'Unknown connection';
@@ -41,10 +47,14 @@ function showAlert() {
 	}
 	
 	alert('xxx Internetverbindung: ' + states[networkState]);
+	alert(2);
 }
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
 </script>
 </head>
-<body>
+<body onload="showAlert();">
 <div align="center">
 	<br><img src="logo_doit.png" /><br><br><br>
 	<div align="center">

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns = "http://www.w3.org/ns/widgets"
-xmlns:gap = "http://phonegap.com/ns/1.0"
-id = "de.doit-ticket"
-versionCode="10" 
-version = "2.5.0">
+<widget xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0" id = "de.doit-ticket" versionCode="10" version = "1.0.0">
 
 <name>DoIT!</name>
 <description>Die App für das DoIT! Informationssystem.</description>
@@ -11,9 +7,26 @@ version = "2.5.0">
 <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 <access origin="*" />
 
+
+<!--
 <feature name="NetworkStatus">
     <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
 </feature>
+-->
+ <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="NetworkStatus">
+                <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        </config-file>
+
+        <source-file src="src/android/NetworkManager.java" target-dir="src/org/apache/cordova/networkinformation" />
+
+    </platform>
 
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->

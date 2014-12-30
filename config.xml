@@ -25,6 +25,10 @@ version = "2.5.0">
 </feature>
 <plugin name="Storage" value="org.apache.cordova.Storage" />
 <plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
+
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 <plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->

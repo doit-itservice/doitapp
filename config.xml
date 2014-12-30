@@ -11,6 +11,11 @@ version = "2.5.0">
 <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 <access origin="*" />
 
+<feature name="NetworkStatus">
+    <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+</feature>
+
+
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <!-- 	
 <widget xmlns     = "http://www.w3.org/ns/widgets"

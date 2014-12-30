@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0" id = "de.doit-ticket" versionCode="10" version = "1.0.0">
+<widget xmlns = "http://www.w3.org/ns/widgets"
+xmlns:gap = "http://phonegap.com/ns/1.0"
+id = "de.doit-ticket"
+versionCode="10" 
+version = "2.5.0">
 
 <name>DoIT!</name>
 <description>Die App für das DoIT! Informationssystem.</description>
@@ -7,19 +11,21 @@
 <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 <access origin="*" />
 
-
-<!--
 <feature name="NetworkStatus">
     <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
 </feature>
--->
-     <feature name="NetworkStatus">
-                <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager"/>
-            </feature>
-  
-
-            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-      
+<feature name="Device">
+    <param name="android-package" value="org.apache.cordova.device.Device" />
+</feature>
+<feature name="Geolocation">
+    <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
+</feature>
+<feature name="Battery">
+    <param name="android-package" value="org.apache.cordova.batterystatus.BatteryListener" />
+</feature>
+<plugin name="Storage" value="org.apache.cordova.Storage" />
+<plugin name="Geolocation" value="org.apache.cordova.GeoBroker" />
+<plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <!-- 	

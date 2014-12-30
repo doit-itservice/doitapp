@@ -13,21 +13,13 @@
     <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
 </feature>
 -->
- <platform name="android">
-        <config-file target="config.xml" parent="/*">
-            <feature name="NetworkStatus">
+     <feature name="NetworkStatus">
                 <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager"/>
             </feature>
-        </config-file>
+  
 
-        <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-        </config-file>
-
-        <source-file src="src/android/NetworkManager.java" target-dir="src/org/apache/cordova/networkinformation" />
-
-    </platform>
-
+      
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <!-- 	

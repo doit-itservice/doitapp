@@ -14,6 +14,9 @@ version = "2.5.0">
 
 <access origin="*" />
 
+
+
+<!--
 <feature name="NetworkStatus">
     <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
 </feature>
@@ -31,7 +34,7 @@ version = "2.5.0">
 
 <plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
 
-<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
+ config.xml reference: https://build.phonegap.com/docs/config-xml -->
 <!-- 	
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"

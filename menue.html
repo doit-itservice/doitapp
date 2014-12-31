@@ -1,28 +1,12 @@
 <html>
 <head>
 <link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" />
-
-
 <script src="cordova.js"></script>
 <script src="jquery-1.9.1.js"></script>
 <script src="jquery.mobile-1.3.2.js"></script>
 
 <script type="text/javascript" charset="utf-8">
-
 function onDeviceReady() {
-	//checkConnection();
-	//alert(navigator.connection);
-	
-	
-	showAlert();
-
-	
-}
-
-
-function showAlert() {
-	alert(1);
-	//var networkState = navigator.network.connection.type;
 	var networkState = navigator.connection.type;
 	
 	var states = {};
@@ -37,21 +21,15 @@ function showAlert() {
 	
 	if((states[networkState] == 'Unknown connection') || (states[networkState] == 'Cell generic connection') || (states[networkState] == 'No network connection'))
 	{
-		/*navigator.notification.alert(
-			'Keine Internetverbindung: ' + states[networkState],  // message
-			alertDismissed,         // callback
-			'Hinweis',            // title
-			'OK'                  // buttonName
-		);*/
 		alert('Keine Internetverbindung: ' + states[networkState]);
 	}
-	
-	alert('xxx Internetverbindung: ' + states[networkState]);
-	alert(2);
+	else
+	{
+		alert('Internetverbindung: ' + states[networkState]);
+	}
 }
 
 document.addEventListener("deviceready", onDeviceReady, false);
-
 </script>
 </head>
 <body>

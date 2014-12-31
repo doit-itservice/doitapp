@@ -11,6 +11,12 @@ version = "2.5.0">
 <gap:plugin name="com.phonegap.plugins.barcodescanner" />
 <gap:plugin name="org.apache.cordova.network-information"/>
 
+  <icon src="applogo.png" gap:platform="android" gap:qualifier="ldpi"/>
+  <icon src="applogo.png" gap:platform="android" gap:qualifier="mdpi"/>
+  <icon src="applogo.png" gap:platform="android" gap:qualifier="hdpi"/>
+  <icon src="applogo.png" gap:platform="android" gap:qualifier="xhdpi"/>
+  
+  
 <access origin="*" />
 
 

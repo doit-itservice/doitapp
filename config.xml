@@ -9,7 +9,7 @@ version = "2.5.0">
 <description>Die App für das DoIT! Informationssystem.</description>
 <author href="http://www.doit-ticket.de" email="app@doit-ticket.de">Oliver Beta, DoIT! IT-Service</author>
 <gap:plugin name="com.phonegap.plugins.barcodescanner" />
-<gap:plugin name="NetworkStatus" value="org.apache.cordova.core.NetworkManager" />
+<gap:plugin name="NetworkStatus" value="org.apache.cordova.networkinformation.NetworkManager" />
 
 
 <access origin="*" />
